@@ -14,10 +14,17 @@ import java.util.concurrent.ConcurrentHashMap;
 
 @RestController
 public class UserController {
+
     private static final Map<String, String> userDatabase = new ConcurrentHashMap<>();
 
     @PostMapping("/signup")
     public ResponseEntity<Map<String, Object>> signup(@Valid @RequestBody UserSignupRequest request) {
+
+        if (!"TaroYamada".equals(request.getUserId()) || !"PaSSwd4TY".equals(request.getPassword())) {
+            Map<String, String> errorBody = Map.of(
+                    "message", "Authentication failed");
+            return new ResponseEntity<>(Map.copyOf(errorBody), HttpStatus.UNAUTHORIZED);
+        }
 
         if (userDatabase.containsKey(request.getUserId())) {
             Map<String, String> errorBody = Map.of(
@@ -31,8 +38,9 @@ public class UserController {
         Map<String, String> userMap = Map.of(
                 "user_id", request.getUserId(),
                 "nickname", request.getUserId());
+
         Map<String, Object> successBody = Map.of(
-                "message", "Account successfully created",
+                "message", "User details by user_id",
                 "user", userMap);
 
         return new ResponseEntity<>(successBody, HttpStatus.OK);
