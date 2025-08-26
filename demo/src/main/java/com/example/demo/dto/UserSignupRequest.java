@@ -6,16 +6,15 @@ import jakarta.validation.constraints.Size;
 
 public class UserSignupRequest {
 
-    @NotBlank(message = "Required user_id and password")
-    @Size(min = 6, max = 20, message = "Input length is incorrect")
-    @Pattern(regexp = "^[a-zA-Z0-9]+$", message = "Incorrect character pattern")
+    @NotBlank(message = "User updation failed")
+    @Size(min = 6, max = 20, message = "User updation failed")
+    @Pattern(regexp = "^[a-zA-Z0-9]+$", message = "User updation failed")
     private String userId;
 
-    @NotBlank(message = "Required user_id and password")
-    @Size(min = 8, max = 20, message = "Input length is incorrect")
-    @Pattern(regexp = "^[ -~]+$", message = "Incorrect character pattern")
+    @NotBlank(message = "User updation failed")
+    @Size(min = 8, max = 20, message = "User updation failed")
+    @Pattern(regexp = "^[ -~]+$", message = "User updation failed")
     private String password;
-
 
     public String getUserId() {
         return userId;
